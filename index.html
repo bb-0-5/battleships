@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TruthShips</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <header class="topbar">
+    <section class="panel">
+      <div class="label">SCOUT</div>
+      <div>Moves: <span id="movesLeft">3</span></div>
+      <div>Signal: <span id="signalState">READY</span></div>
+    </section>
+
+    <section class="panel command-panel">
+      <div class="label">COMMAND</div>
+      <button id="sonarBtn">SONAR</button>
+      <button id="sendIntelBtn">SEND INTEL</button>
+      <button id="fireBtn">FIRE</button>
+      <button id="endTurnBtn">END TURN</button>
+    </section>
+
+    <section class="panel">
+      <div class="label">TURN</div>
+      <div id="turnText">TURN 1</div>
+      <div class="tiny">One radio transmission per turn</div>
+    </section>
+  </header>
+
+  <main class="boards">
+    <section class="board-wrap">
+      <h2>SCOUT LOCAL REALITY</h2>
+      <canvas id="localCanvas" width="480" height="480"></canvas>
+    </section>
+
+    <section class="board-wrap">
+      <h2>COMMAND PROBABILITY MATRIX</h2>
+      <canvas id="probCanvas" width="480" height="480"></canvas>
+    </section>
+  </main>
+
+  <aside class="radio-box">
+    <div class="label">RADIO</div>
+    <div class="tiny">Delayed / interceptable / jammable</div>
+
+    <input
+      id="radioInput"
+      placeholder="one message this turn"
+      autocomplete="off"
+    />
+
+    <button id="radioBtn">TRANSMIT</button>
+  </aside>
+
+  <section class="statusbar">
+    <div id="selectedText">Selected: none</div>
+    <div id="matrixText">Matrix waiting for intel...</div>
+  </section>
+
+  <section id="log" class="log"></section>
+
+  <script src="game.js"></script>
+</body>
+</html>
