@@ -923,6 +923,41 @@ function drawSelectedTarget(ctx) {
 }
 
 function drawScoutView() {
+  function drawSonarRing(ctx) {
+  if (!lastSonar) {
+    return;
+  }
+
+  ctx.strokeStyle = "#ffff66";
+  ctx.lineWidth = 3;
+
+  for (let y = 0; y < GRID; y++) {
+    for (let x = 0; x < GRID; x++) {
+      let d =
+        Math.abs(lastSonar.originX - x) +
+        Math.abs(lastSonar.originY - y);
+
+      if (d === lastSonar.range && !isLand(x, y)) {
+        ctx.fillStyle = "rgba(255,255,102,0.18)";
+        ctx.fillRect(
+          x * CELL + 5,
+          y * CELL + 5,
+          CELL - 10,
+          CELL - 10
+        );
+
+        ctx.strokeRect(
+          x * CELL + 5,
+          y * CELL + 5,
+          CELL - 10,
+          CELL - 10
+        );
+      }
+    }
+  }
+
+  ctx.lineWidth = 1;
+}
   drawGrid(lctx);
   drawLand(lctx);
   drawLegalMoves(lctx);
