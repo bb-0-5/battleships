@@ -1382,6 +1382,7 @@ function endTurn() {
   moveEnemies();
   processMessages();
   applyVisualIntel();
+  runCommandAI();
 
   legalMoveTiles = computeLegalMoves(selectedFriendly());
 
