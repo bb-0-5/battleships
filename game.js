@@ -654,6 +654,29 @@ function processMessages() {
   }
 }
 
+function buildAIContext() {
+  return {
+    grid: GRID,
+    friendlies,
+    enemies,
+    matrix,
+    isLand,
+    isVisible
+  };
+}
+
+function rememberAI(type, note, data = {}) {
+  if (!window.TruthShipsAI) {
+    return;
+  }
+
+  window.TruthShipsAI.remember({
+    turn,
+    type,
+    note,
+    data
+  });
+}
 function moveEnemies() {
   if (gameOver) {
     return;
