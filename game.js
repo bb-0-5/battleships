@@ -677,6 +677,7 @@ function rememberAI(type, note, data = {}) {
     data
   });
 }
+
 function moveEnemies() {
   if (gameOver) {
     return;
@@ -753,50 +754,6 @@ function moveEnemies() {
     }
   }
 }
-
-  for (let e of aliveEnemies()) {
-    let dirs = [
-      [0, 0],
-      [1, 0],
-      [-1, 0],
-      [0, 1],
-      [0, -1]
-    ];
-
-    let d =
-      dirs[Math.floor(Math.random() * dirs.length)];
-
-    let nx = clamp(e.x + d[0], 0, GRID - 1);
-    let ny = clamp(e.y + d[1], 0, GRID - 1);
-
-    if (!isLand(nx, ny)) {
-      e.x = nx;
-      e.y = ny;
-    }
-
-    let friendly = friendlyAt(e.x, e.y);
-
-    if (friendly) {
-      friendly.alive = false;
-      e.alive = false;
-
-      log(
-        "ENEMY COLLISION: " +
-        e.type +
-        " DESTROYED " +
-        friendly.role +
-        ". BOTH LOST."
-      );
-    }
-  }
-}
-
-function resetFriendlyMoves() {
-  for (let f of friendlies) {
-    f.movesLeft = f.alive ? roleStats[f.role].move : 0;
-  }
-}
-
 function drawGrid(ctx) {
   ctx.clearRect(0, 0, GRID * CELL, GRID * CELL);
 
