@@ -959,6 +959,7 @@ function drawSonarRing(ctx) {
 function drawScoutView() {
   drawGrid(lctx);
   drawLand(lctx);
+  drawSonarRing(lctx);
   drawLegalMoves(lctx);
   drawSelectedTarget(lctx);
   drawFriendlies(lctx);
@@ -966,7 +967,6 @@ function drawScoutView() {
   drawVisibleMines(lctx);
   drawFog(lctx);
 }
-
 function drawProbabilityMatrix() {
   drawGrid(pctx);
   drawLand(pctx);
