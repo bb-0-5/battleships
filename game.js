@@ -1345,7 +1345,28 @@ function fireTorpedo() {
     delay
   );
 }
+function runCommandAI() {
+  if (!window.TruthShipsAI) {
+    return;
+  }
 
+  let suggestion =
+    window.TruthShipsAI.suggestFriendlyAction(
+      buildAIContext()
+    );
+
+  if (!suggestion) {
+    return;
+  }
+
+  log("AI COMMAND: " + suggestion.text);
+
+  rememberAI(
+    "command_suggestion",
+    suggestion.text,
+    suggestion
+  );
+}
 function endTurn() {
   if (gameOver) {
     log("GAME COMPLETE");
