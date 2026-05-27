@@ -921,9 +921,7 @@ function drawSelectedTarget(ctx) {
   );
   ctx.lineWidth = 1;
 }
-
-function drawScoutView() {
-  function drawSonarRing(ctx) {
+function drawSonarRing(ctx) {
   if (!lastSonar) {
     return;
   }
@@ -958,6 +956,7 @@ function drawScoutView() {
 
   ctx.lineWidth = 1;
 }
+function drawScoutView() {
   drawGrid(lctx);
   drawLand(lctx);
   drawLegalMoves(lctx);
