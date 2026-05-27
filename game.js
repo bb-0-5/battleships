@@ -683,6 +683,78 @@ function moveEnemies() {
   }
 
   for (let e of aliveEnemies()) {
+    let move;
+
+    if (window.TruthShipsAI) {
+      move = window.TruthShipsAI.chooseEnemyMove(
+        e,
+        buildAIContext()
+      );
+    } else {
+      let dirs = [
+        [0, 0],
+        [1, 0],
+        [-1, 0],
+        [0, 1],
+        [0, -1]
+      ];
+
+      let d =
+        dirs[Math.floor(Math.random() * dirs.length)];
+
+      move = {
+        dx: d[0],
+        dy: d[1]
+      };
+    }
+
+    let nx = clamp(e.x + move.dx, 0, GRID - 1);
+    let ny = clamp(e.y + move.dy, 0, GRID - 1);
+
+    if (!isLand(nx, ny)) {
+      e.x = nx;
+      e.y = ny;
+    }
+
+    rememberAI(
+      "enemy_move",
+      e.type + " moved",
+      {
+        enemy: e.id,
+        x: e.x,
+        y: e.y
+      }
+    );
+
+    let friendly = friendlyAt(e.x, e.y);
+
+    if (friendly) {
+      friendly.alive = false;
+      e.alive = false;
+
+      log(
+        "ENEMY COLLISION: " +
+        e.type +
+        " DESTROYED " +
+        friendly.role +
+        ". BOTH LOST."
+      );
+
+      rememberAI(
+        "collision",
+        "Enemy collided with friendly",
+        {
+          enemy: e.type,
+          friendly: friendly.role,
+          x: e.x,
+          y: e.y
+        }
+      );
+    }
+  }
+}
+
+  for (let e of aliveEnemies()) {
     let dirs = [
       [0, 0],
       [1, 0],
